@@ -32,3 +32,23 @@ app.listen(3000, function () {
 app.get('/', function (req, res) {
     res.sendFile(__dirname + "/public/homepage.html")
 })
+
+app.get('/archive', function (req, res) {
+    res.sendFile(__dirname + "/public/archive.html")
+})
+
+app.get("/get_all_blog_posts", function (req, res) {
+    BlogPost.find( function (err, data) {
+        if (err) {
+            res.send({
+                "message": "internal server error",
+                "data": []
+            });
+        } else {
+            res.send({
+                "message": "success",
+                "data": data
+            })
+        }
+    })
+});
