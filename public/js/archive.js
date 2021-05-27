@@ -18,7 +18,7 @@ function showList(blog_posts) {
         .append("<div class='col-2 municipalityDiv'></div>")
         .append("<div class='col-2 addressDiv'></div>")
         .append("<div class='col-1 bannerDiv'></div>")
-        .append("<div class='col-1 postedDiv'></div>")
+        .append("<div class='col-2 postedDiv'></div>")
         .append("<div class='col-1 typeDiv'></div>")
         .append("<div class='col-1 regionDiv'></div>")
         .append("<div class='col-1 groupDiv'></div>")
@@ -62,18 +62,23 @@ function showList(blog_posts) {
     $('.linkDiv').append(idx => {
         return `<a href="${blog_posts[idx].link}">Link to post</a>`
     });
-    // const testDate = new Date(Date.parse(blog_posts[3].posted))
-    // console.log(testDate.getFullYear())
-
-
 }
 $.getJSON("/get_all_blog_posts")
     .done(function (data) {
         console.log(data.message)
         if(data.message==="success"){
             blogList= data.data;
-            // console.log(data.data[0])
-            // console.log(blogList[0])
             showList(blogList)
         }
     })
+
+function searchBlogPosts() {
+    $.get("/get_blog_posts_by_filters", {
+        search_key: $('#search_box').val()
+    }).done((data) => {
+        if(data.message==="success") {
+            console.log(data.message)
+            showList(data.data)
+        }
+    })
+}

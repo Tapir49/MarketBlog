@@ -1,0 +1,8 @@
+#headers p {
+    padding: .5rem 0rem;
+}
+
+.list-group {
+    max-height: 500px;
+    overflow: scroll;
+}

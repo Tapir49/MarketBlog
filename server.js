@@ -52,3 +52,26 @@ app.get("/get_all_blog_posts", function (req, res) {
         }
     })
 });
+
+app.get("/get_blog_posts_by_filters", function (req, res){
+    const sk = req.query.search_key
+    BlogPost.find({
+        $or: [
+            {municipality: {$regex: sk}},
+            {address: {$regex: sk}},
+            {banner: {$regex: sk}},
+        ]
+    }, (err, data) => {
+        if (err) {
+            res.send({
+                "message": "database error",
+                "data": []
+            })
+        } else {
+            res.send( {
+                "message": "success",
+                "data": data
+            })
+        }
+    })
+})
