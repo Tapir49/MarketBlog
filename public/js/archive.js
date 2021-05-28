@@ -1,4 +1,4 @@
-blogList = []
+let blogList = []
 function showList(blog_posts) {
     console.log("showing list")
 
@@ -62,12 +62,31 @@ function showList(blog_posts) {
     $('.linkDiv').append(idx => {
         return `<a href="${blog_posts[idx].link}">Link to post</a>`
     });
+    // console.log(states.sort());
+
 }
 $.getJSON("/get_all_blog_posts")
     .done(function (data) {
         console.log(data.message)
         if(data.message==="success"){
             blogList= data.data;
+
+            // create sets of unique filter criteria
+            const states = new Set();
+            const postType = new Set();
+
+            // iterate through blog posts and add info to relative sets
+            blogList.forEach((item) => {
+                states.add(item.state);
+                postType.add(item.type)
+            })
+            // add items in sets to dropdown filters
+            states.forEach((state) => {
+                $('#state').append(`<option value="${state}">${state}</option>`)
+            })
+            postType.forEach((type) => {
+                $('#post_type').append(`<option value="${type}">${type}</option>`)
+            })
             showList(blogList)
         }
     })
@@ -78,6 +97,7 @@ function searchBlogPosts() {
     }).done((data) => {
         if(data.message==="success") {
             console.log(data.message)
+
             showList(data.data)
         }
     })

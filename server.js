@@ -20,7 +20,8 @@ const blogPostSchema = {
     type: String,
     region: String,
     group: String,
-    link: String
+    link: String,
+    content: String
 }
 
 const BlogPost = mongoose.model('BlogPost', blogPostSchema);
@@ -60,6 +61,7 @@ app.get("/get_blog_posts_by_filters", function (req, res){
             {municipality: {$regex: sk}},
             {address: {$regex: sk}},
             {banner: {$regex: sk}},
+            {content: {$regex: sk}}
         ]
     }, (err, data) => {
         if (err) {
