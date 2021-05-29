@@ -74,11 +74,19 @@ $.getJSON("/get_all_blog_posts")
             // create sets of unique filter criteria
             const states = new Set();
             const postType = new Set();
+            const banners = new Set();
+            const regions = new Set();
+            const groups = new Set();
 
             // iterate through blog posts and add info to relative sets
             blogList.forEach((item) => {
                 states.add(item.state);
-                postType.add(item.type)
+                postType.add(item.type);
+                banners.add(item.banner);
+                regions.add(item.region);
+                if(item.group){
+                    groups.add(item.group);
+                }
             })
             // add items in sets to dropdown filters
             states.forEach((state) => {
@@ -87,18 +95,39 @@ $.getJSON("/get_all_blog_posts")
             postType.forEach((type) => {
                 $('#post_type').append(`<option value="${type}">${type}</option>`)
             })
+            banners.forEach((banner) => {
+                $('#banner').append(`<option value="${banner}">${banner}</option>`)
+            })
+            regions.forEach((region) => {
+                $('#region').append(`<option value="${region}">${region}</option>`)
+            })
+            groups.forEach((group) => {
+                $('#group').append(`<option value="${group}">${group}</option>`)
+            })
             showList(blogList)
         }
     })
 
 function searchBlogPosts() {
-    $.get("/get_blog_posts_by_filters", {
-        search_key: $('#search_box').val()
-    }).done((data) => {
-        if(data.message==="success") {
-            console.log(data.message)
+    const sk = $("#search_box").val().toLowerCase();
+    const state = $("#state").val();
+    const post_type = $("#post_type").val();
+    const region = $("#region").val();
+    const group = $("#group").val();
+    const banner = $("#banner").val();
 
-            showList(data.data)
-        }
-    })
+    showList(blogList.filter((e) => {
+        return (e.content.toLowerCase().includes(sk) ||
+            e.municipality.toLowerCase().includes(sk) ||
+            e.banner.toLowerCase().includes(sk) ||
+            e.address.toLowerCase().includes(sk) ||
+            e.region.toLowerCase().includes(sk) ||
+            e.group.toLowerCase().includes(sk)) &&
+            (e.state === state || !state) &&
+            (e.type === post_type || !post_type) &&
+            (e.region === region || !region) &&
+            (e["group"] === group || !group) &&
+            (e.banner === banner || !banner)
+    }));
+
 }
