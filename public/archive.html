@@ -62,46 +62,45 @@
 </section>
 
 <section id="search">
-    <div class="row">
-        <div class="col-md-11">
-            <input id="search_box" type="search" class="form-control" placeholder="Search posts..."
-                   onsearch="searchBlogPosts()">
+    <div class="row d-flex justify-content-evenly">
+        <div class="col-11">
+            <input id="search_box" type="search" class="form-control m-3" placeholder="Search posts..." onsearch="searchBlogPosts()">
 
         </div>
-        <div class="col-md-1">
-            <button class="btn btn-primary" onClick="searchBlogPosts()">Test</button>
+        <div class="col-1">
+            <button class="btn btn-primary m-3" onClick="searchBlogPosts()">Filter</button>
 
         </div>
     </div>
-    <div class="row">
-        <div class="">
-            <label for="state">Choose a state:</label>
-            <select id="state" name="state" onchange="searchBlogPosts()">
-                <option value="" selected></option>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 row-cols-lg-6 d-flex justify-content-evenly">
+        <div class="col">
+<!--            <label for="state">Choose a state:</label>-->
+            <select class="form-select m-3" id="state" name="state" onchange="searchBlogPosts()">
+                <option value="" selected>Choose a state</option>
             </select>
         </div>
-        <div class="">
-            <label for="post_type">Choose a post type:</label>
-            <select id="post_type" name="post_type" onchange="searchBlogPosts()">
-                <option value="" selected></option>
+        <div class="col">
+<!--            <label for="post_type">Choose a post type:</label>-->
+            <select class="form-select m-3" id="post_type" name="post_type" onchange="searchBlogPosts()">
+                <option value="" selected>Choose a post type</option>
             </select>
         </div>
-        <div class="">
-            <label for="banner">Choose a banner:</label>
-            <select id="banner" name="banner" onchange="searchBlogPosts()">
-                <option value="" selected></option>
+        <div class="col">
+<!--            <label for="region">Choose a region:</label>-->
+            <select class="form-select m-3" id="region" name="region" onchange="searchBlogPosts()">
+                <option value="" selected>Choose a region</option>
             </select>
         </div>
-        <div class="">
-            <label for="region">Choose a region:</label>
-            <select id="region" name="region" onchange="searchBlogPosts()">
-                <option value="" selected></option>
+        <div class="col">
+            <!--            <label for="banner">Choose a banner:</label>-->
+            <select class="form-select m-3" id="banner" name="banner" onchange="searchBlogPosts()">
+                <option value="" selected>Choose a banner</option>
             </select>
         </div>
-        <div class="">
-            <label for="group">Choose a group:</label>
-            <select id="group" name="group" onchange="searchBlogPosts()">
-                <option value="" selected></option>
+        <div class="col">
+<!--            <label for="group">Choose a group:</label>-->
+            <select class="form-select m-3" id="group" name="group" onchange="searchBlogPosts()">
+                <option value="" selected>Choose a group</option>
             </select>
         </div>
     </div>
