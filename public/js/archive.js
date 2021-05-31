@@ -14,15 +14,15 @@ function showList(blog_posts) {
         })
         .append("<div class='row'></div>");
     $('#blog_list .row')
-        .append("<div class='col-1 stateDiv'></div>")
-        .append("<div class='col-2 municipalityDiv'></div>")
-        .append("<div class='col-2 addressDiv'></div>")
-        .append("<div class='col-1 bannerDiv'></div>")
-        .append("<div class='col-2 postedDiv'></div>")
-        .append("<div class='col-1 typeDiv'></div>")
-        .append("<div class='col-1 regionDiv'></div>")
-        .append("<div class='col-1 groupDiv'></div>")
-        .append("<div class='col-1 linkDiv'></div>")
+        .append("<div class='col-4 col-md-2 bannerDiv'></div>")
+        .append("<div class='col-1 col-md-1 stateDiv'></div>")
+        .append("<div class='col-3 col-md-3 municipalityDiv'></div>")
+        .append("<div class='col-4 col-md-3 addressDiv'></div>")
+        .append("<div class='col col-md-2 d-none d-md-block postedDiv'></div>")
+        .append("<div class='col col-md-1 d-none d-md-block typeDiv'></div>")
+        // .append("<div class='col-1 regionDiv'></div>")
+        // .append("<div class='col-1 groupDiv'></div>")
+        // .append("<div class='col-1 linkDiv'></div>")
 
     $('.stateDiv').append(idx => {
         return `<p>${blog_posts[idx].state}</p>`
@@ -51,17 +51,17 @@ function showList(blog_posts) {
         return `<p>${blog_posts[idx].type}</p>`
     });
 
-    $('.regionDiv').append(idx => {
-        return `<p>${blog_posts[idx].region}</p>`
-    });
+    // $('.regionDiv').append(idx => {
+    //     return `<p>${blog_posts[idx].region}</p>`
+    // });
 
-    $('.groupDiv').append(idx => {
-        return `<p>${blog_posts[idx].group}</p>`
-    });
+    // $('.groupDiv').append(idx => {
+    //     return `<p>${blog_posts[idx].group}</p>`
+    // });
 
-    $('.linkDiv').append(idx => {
-        return `<a href="${blog_posts[idx].link}">Link to post</a>`
-    });
+    // $('.linkDiv').append(idx => {
+    //     return `<a href="${blog_posts[idx].link}">Link to post</a>`
+    // });
     // console.log(states.sort());
 
 }
