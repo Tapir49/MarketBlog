@@ -1,28 +1,43 @@
 let blogList = []
+
 function showList(blog_posts) {
     console.log("showing list")
 
-    $("#blog_list").empty();
+    $("#blog_table").empty()
+    $("#blog_table").append(
+        "<thead>\n" +
+        "<tr>\n" +
+        "            <th>Banner</th>\n" +
+        "            <th>State</th>\n" +
+        "            <th>Municipality</th>\n" +
+        "            <th>Address</th>\n" +
+        "            <th>Date Posted</th>\n" +
+        "            <th>Post Type</th>\n" +
+        "        </tr>\n" +
+        "</thead>\n" +
+        "<tbody></ttbody>"
+    );
 
-    for (let i = 0; i < blog_posts.length; i++){
-        $('#blog_list').append("<li class='list-group-item'></li>");
+    for (let i = 0; i < blog_posts.length; i++) {
+        // $('#blog_list').append("<li class='list-group-item'></li>");
+        $('#blog_table tbody').append("<tr class='post-entry'></tr>");
     }
 
-    $('#blog_list li')
-        .attr("value", function (idx){
+    $('#blog_table .post-entry')
+        .attr("value", function (idx) {
             return blog_posts[idx]._id;
         })
-        .append("<div class='row'></div>");
-    $('#blog_list .row')
-        .append("<div class='col-4 col-md-2 bannerDiv'></div>")
-        .append("<div class='col-1 col-md-1 stateDiv'></div>")
-        .append("<div class='col-3 col-md-3 municipalityDiv'></div>")
-        .append("<div class='col-4 col-md-3 addressDiv'></div>")
-        .append("<div class='col col-md-2 d-none d-md-block postedDiv'></div>")
-        .append("<div class='col col-md-1 d-none d-md-block typeDiv'></div>")
-        // .append("<div class='col-1 regionDiv'></div>")
-        // .append("<div class='col-1 groupDiv'></div>")
-        // .append("<div class='col-1 linkDiv'></div>")
+    // .append("<div class='row'></div>");
+    $('#blog_table .post-entry')
+        .append("<td class='bannerDiv'></td>")
+        .append("<td class='stateDiv'></td>")
+        .append("<td class='municipalityDiv'></td>")
+        .append("<td class='addressDiv'></td>")
+        .append("<td class='postedDiv'></td>")
+        .append("<td class='typeDiv'></td>")
+    // .append("<div class='col-1 regionDiv'></div>")
+    // .append("<div class='col-1 groupDiv'></div>")
+    // .append("<div class='col-1 linkDiv'></div>")
 
     $('.stateDiv').append(idx => {
         return `<p>${blog_posts[idx].state}</p>`
@@ -65,11 +80,12 @@ function showList(blog_posts) {
     // console.log(states.sort());
 
 }
+
 $.getJSON("/get_all_blog_posts")
     .done(function (data) {
         console.log(data.message)
-        if(data.message==="success"){
-            blogList= data.data;
+        if (data.message === "success") {
+            blogList = data.data;
 
             // create sets of unique filter criteria
             const states = new Set();
@@ -84,7 +100,7 @@ $.getJSON("/get_all_blog_posts")
                 postType.add(item.type);
                 banners.add(item.banner);
                 regions.add(item.region);
-                if(item.group){
+                if (item.group) {
                     groups.add(item.group);
                 }
             })
