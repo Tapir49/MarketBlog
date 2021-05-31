@@ -35,6 +35,9 @@ function showList(blog_posts) {
         .append("<td class='addressDiv'></td>")
         .append("<td class='postedDiv'></td>")
         .append("<td class='typeDiv'></td>")
+        .on('click', function () {
+            location.href="blogpost_detail.html?blog_id=" + $(this).attr("value")
+        })
     // .append("<div class='col-1 regionDiv'></div>")
     // .append("<div class='col-1 groupDiv'></div>")
     // .append("<div class='col-1 linkDiv'></div>")

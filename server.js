@@ -53,3 +53,19 @@ app.get("/get_all_blog_posts", function (req, res) {
         }
     })
 });
+
+app.get("/get_blog_post_by_id", function (req, res) {
+    BlogPost.find({"_id": req.query.blog_id},  function (err, data) {
+        if (err) {
+            res.send({
+                "message": "internal server error",
+                "data": []
+            });
+        } else {
+            res.send({
+                "message": "success",
+                "data": data
+            })
+        }
+    })
+});
