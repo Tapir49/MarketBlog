@@ -91,11 +91,11 @@ $.getJSON("/get_all_blog_posts")
             blogList = data.data;
 
             // create sets of unique filter criteria
-            const states = new Set();
-            const postType = new Set();
-            const banners = new Set();
-            const regions = new Set();
-            const groups = new Set();
+            let states = new Set();
+            let postType = new Set();
+            let banners = new Set();
+            let regions = new Set();
+            let groups = new Set();
 
             // iterate through blog posts and add info to relative sets
             blogList.forEach((item) => {
@@ -107,6 +107,12 @@ $.getJSON("/get_all_blog_posts")
                     groups.add(item.group);
                 }
             })
+            // convert the sets to lists and sort them alphabetically
+            states = Array.from(states).sort()
+            postType = Array.from(postType).sort()
+            banners = Array.from(banners).sort()
+            regions = Array.from(regions).sort()
+            groups = Array.from(groups).sort()
             // add items in sets to dropdown filters
             states.forEach((state) => {
                 $('#state').append(`<option value="${state}">${state}</option>`)

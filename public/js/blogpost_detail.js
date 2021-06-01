@@ -10,7 +10,7 @@ function load_blogpost(blog_post) {
         .append(`<tr><td>State</td><td>${blog_post.state}</td></tr>`)
         .append(`<tr><td>Region</td><td>${blog_post.region}</td></tr>`)
         .append(`<tr><td>Group</td><td>${blog_post.group}</td></tr>`)
-        .append(idx => {
+        .append(idx =>  {
             const date = new Date(Date.parse(blog_post.posted))
             // just get the Y/M/D of the date
             // TODO: change to MM/DD/YYYY
