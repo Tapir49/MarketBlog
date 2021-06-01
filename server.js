@@ -38,6 +38,10 @@ app.get('/archive', function (req, res) {
     res.sendFile(__dirname + "/public/archive.html")
 })
 
+app.get('/regions', function (req, res) {
+    res.sendFile(__dirname + "/public/regions.html")
+})
+
 app.get("/get_all_blog_posts", function (req, res) {
     BlogPost.find( function (err, data) {
         if (err) {

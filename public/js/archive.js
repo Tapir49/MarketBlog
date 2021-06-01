@@ -68,20 +68,6 @@ function showList(blog_posts) {
     $('.typeDiv').append(idx => {
         return `<p>${blog_posts[idx].type}</p>`
     });
-
-    // $('.regionDiv').append(idx => {
-    //     return `<p>${blog_posts[idx].region}</p>`
-    // });
-
-    // $('.groupDiv').append(idx => {
-    //     return `<p>${blog_posts[idx].group}</p>`
-    // });
-
-    // $('.linkDiv').append(idx => {
-    //     return `<a href="${blog_posts[idx].link}">Link to post</a>`
-    // });
-    // console.log(states.sort());
-
 }
 
 $.getJSON("/get_all_blog_posts")
