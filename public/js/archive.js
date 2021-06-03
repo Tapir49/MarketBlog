@@ -115,7 +115,15 @@ $.getJSON("/get_all_blog_posts")
             groups.forEach((group) => {
                 $('#group').append(`<option value="${group}">${group}</option>`)
             })
-            showList(blogList)
+            const query = window.location.search;
+            const urlParams = new URLSearchParams(query);
+            const region = urlParams.get('region');
+            if(region) {
+                $("#region").val(region)
+                searchBlogPosts()
+            } else {
+                showList(blogList)
+            }
         }
     })
 
