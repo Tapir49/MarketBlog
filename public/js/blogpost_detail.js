@@ -18,7 +18,7 @@ function load_blogpost(blog_post) {
     $("#details").append('<div class="btn-group w-100" id="bottom_buttons" role="group"></div>')
     $("#bottom_buttons").append(`<a class="btn btn-primary" href="${blog_post.link}">Link to post</a>`)
     $("#bottom_buttons").append(`<a class="btn btn-secondary" href="/archive">Back to archive</a>`)
-    $("#bottom_buttons").append(`<a class="btn btn-primary" href="/archive">Save post</a>`)
+    $("#bottom_buttons").append(`<a class="btn btn-primary" onclick="savePost()">Save post</a>`)
 
 }
 
@@ -36,3 +36,7 @@ $(document).ready(function () {
             })
     }
 })
+
+function savePost() {
+    console.log($.get('/get_current_user'))
+}

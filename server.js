@@ -198,6 +198,19 @@ app.post('/login', (req, res) => {
     )
 });
 
+app.get('/logout', function (req, res) {
+    req.logout();
+    res.redirect('/')
+});
+
+app.get("/account", (req, res) => {
+    if (req.isAuthenticated()) {
+        res.sendFile(__dirname + "/src/myaccount.html");
+    } else {
+        res.redirect("/login.html?error=You must login to view your account");
+    }
+})
+
 app.get("/get_all_blog_posts", function (req, res) {
     BlogPost.find( function (err, data) {
         if (err) {
@@ -229,3 +242,17 @@ app.get("/get_blog_post_by_id", function (req, res) {
         }
     })
 });
+
+app.get('/get_current_user', function (req, res) {
+    if (req.isAuthenticated()) {
+        res.send({
+            message: "success",
+            data: req.user
+        });
+    } else {
+        res.send({
+            message: "no login",
+            data: {}
+        })
+    }
+})
