@@ -1,8 +1,25 @@
-root {
+:root {
     /* CSS HEX */
     --imperial-red: #e63946ff;
     --honeydew: #f1faeeff;
     --powder-blue: #a8dadcff;
     --celadon-blue: #457b9dff;
     --prussian-blue: #1d3557ff;
+}
+#header_section{
+    font-family: 'Odibee Sans', cursive
+}
+
+#summary{
+    font-family: 'Odibee Sans', cursive;
+    background-color: cornflowerblue;
+}
+
+#footer{
+    height: 80px;
+    background-color: var(--prussian-blue);
+    font-family: 'Odibee Sans', cursive;
+    color: var(--honeydew);
+    text-align: center;
+    padding-top: 10px;
 }
