@@ -24,7 +24,7 @@ $.getJSON("/get_all_blog_posts")
             })
 
             $("#region_images img").on('click', function() {
-                location.href="region_detail.html?region=" + $(this).attr("value")
+                location.href="archive.html?region=" + $(this).attr("value")
             })
         }
     })
