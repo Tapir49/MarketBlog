@@ -43,6 +43,9 @@ const blogPostSchema = {
 
 const BlogPost = mongoose.model('BlogPost', blogPostSchema);
 
+// suggestion to use {typeKey: '$type'} comes from
+// https://stackoverflow.com/questions/33846939/mongoose-schema-error-cast-to-string-failed-for-value-when-pushing-object-to
+// Used because mongoose was rejecting liked blogposts due to a CastError
 const userSchema = mongoose.Schema(
     {
         username: {
@@ -64,7 +67,17 @@ const userSchema = mongoose.Schema(
             required: true,
         },
         likes: [
-            {post_id: String}
+            {
+                post_id: String,
+                state: String,
+                municipality: String,
+                address: String,
+                banner:String,
+                posted: String,
+                postType: String,
+                region: String,
+                group: String
+            }
         ]
     }
 );
@@ -212,7 +225,7 @@ app.get("/account", (req, res) => {
 })
 
 app.get("/get_all_blog_posts", function (req, res) {
-    BlogPost.find( function (err, data) {
+    BlogPost.find(function (err, data) {
         if (err) {
             res.send({
                 "message": "internal server error",
@@ -228,7 +241,7 @@ app.get("/get_all_blog_posts", function (req, res) {
 });
 
 app.get("/get_blog_post_by_id", function (req, res) {
-    BlogPost.find({"_id": req.query.blog_id},  function (err, data) {
+    BlogPost.find({"_id": req.query.blog_id}, function (err, data) {
         if (err) {
             res.send({
                 "message": "internal server error",
@@ -256,3 +269,68 @@ app.get('/get_current_user', function (req, res) {
         })
     }
 })
+
+app.post('/save_post', function (req, res) {
+    if (req.isAuthenticated()) {
+        const blog_post = {
+            post_id: req.body.post_id,
+            state: req.body.state,
+            municipality: req.body.municipality,
+            address: req.body.address,
+            banner: req.body.banner,
+            posted: req.body.posted,
+            postType: req.body.type,
+            region: req.body.region,
+            group: req.body.group
+        }
+        User.updateOne({_id: req.user._id, 'likes.post_id': {$ne: blog_post.post_id}},
+            {
+                $push: {likes: blog_post}
+            },
+            {},
+            (err) => {
+                if (err) {
+                    res.send({
+                        message: "database errorr"
+                    });
+                } else {
+                    res.send({
+                        message: "success"
+                    })
+                }
+            })
+    } else {
+        res.send({
+            message: "You must login to save posts",
+            data: "/login"
+        })
+    }
+});
+
+app.post('/unsave_post', function (req, res) {
+    if (req.isAuthenticated()) {
+        User.updateOne({_id: req.user._id},
+            {
+                $pull: {likes: {post_id: req.body.post_id}}
+            },
+            {},
+            (err, info) => {
+                if (err) {
+                    console.log(err);
+                    res.send({
+                        message: "database errorr"
+                    });
+                } else {
+                    console.log(info);
+                    res.send({
+                        message: "success"
+                    })
+                }
+            })
+    } else {
+        res.send({
+            message: "You must login first",
+            data: "/login"
+        })
+    }
+});

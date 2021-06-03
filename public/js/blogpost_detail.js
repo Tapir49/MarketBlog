@@ -17,8 +17,12 @@ function load_blogpost(blog_post) {
             return `<tr><td>Posted</td><td>${date.toISOString().split('T')[0]}</td></tr>`})
     $("#details").append('<div class="btn-group w-100" id="bottom_buttons" role="group"></div>')
     $("#bottom_buttons").append(`<a class="btn btn-primary" href="${blog_post.link}">Link to post</a>`)
-    $("#bottom_buttons").append(`<a class="btn btn-secondary" href="/archive">Back to archive</a>`)
-    $("#bottom_buttons").append(`<a class="btn btn-primary" onclick="savePost()">Save post</a>`)
+        .append(`<a class="btn btn-secondary" href="/archive">Back to archive</a>`)
+        .append(`<a class="btn btn-primary" id="save_post">Save post</a>`)
+
+    $("#save_post").click(function() {
+        savePost(blog_post);
+    })
 
 }
 
@@ -37,6 +41,24 @@ $(document).ready(function () {
     }
 })
 
-function savePost() {
-    console.log($.get('/get_current_user'))
+function savePost(blog_post) {
+    $.post("/save_post", {
+        post_id: blog_post._id,
+        state: blog_post.state,
+        municipality: blog_post.municipality,
+        address: blog_post.address,
+        banner: blog_post.banner,
+        posted: blog_post.posted,
+        type: blog_post.type,
+        region: blog_post.region,
+        group: blog_post["group"]
+    }).done(function (data) {
+        if(data.message === "success"){
+            console.log("post saved")
+        } else {
+            console.log(data.message)
+            console.log("post not saved")
+            location.href="/login.html"
+        }
+    })
 }

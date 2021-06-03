@@ -5,17 +5,17 @@ function showList(blog_posts) {
 
     $("#blog_table").empty()
     $("#blog_table").append(
-        "<thead>\n" +
-        "<tr>\n" +
-        "            <th>Banner</th>\n" +
-        "            <th>State</th>\n" +
-        "            <th>Municipality</th>\n" +
-        "            <th>Address</th>\n" +
-        "            <th>Date Posted</th>\n" +
-        "            <th>Post Type</th>\n" +
-        "        </tr>\n" +
-        "</thead>\n" +
-        "<tbody></ttbody>"
+        `<thead> 
+            <tr> 
+                <th>Banner</th>
+                <th>State</th>
+                <th>Municipality</th>
+                <th>Address</th>
+                <th>Date Posted</th>
+                <th>Post Type</th>
+            </tr>
+        </thead>
+        <tbody></ttbody>`
     );
 
     for (let i = 0; i < blog_posts.length; i++) {
