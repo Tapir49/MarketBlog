@@ -97,6 +97,10 @@ app.get('/contact', function (req, res) {
     res.sendFile(__dirname + "/public/contact.html")
 })
 
+app.get('/contact', function (req, res) {
+    res.sendFile(__dirname + "/public/contact.html")
+})
+
 app.get('/get_current_user', function (req, res) {
     if (req.isAuthenticated()) {
         res.send({
