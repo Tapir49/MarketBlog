@@ -61,7 +61,6 @@ function showList(blog_posts) {
     $('.postedDiv').append(idx => {
         const testDate = new Date(Date.parse(blog_posts[idx].posted))
         // just get the Y/M/D of the date
-        // TODO: change to MM/DD/YYYY
         return `<p>${testDate.toISOString().split('T')[0]}</p>`
     });
 
@@ -74,6 +73,14 @@ $.getJSON("/get_all_blog_posts")
     .done(function (data) {
         console.log(data.message)
         if (data.message === "success") {
+            $.getJSON("/get_current_user")
+                .done(function (data) {
+                    if (data.data.admin === true) {
+                        $('#search').append("<a class='btn btn-primary w-100' href='/edit-post'>Add Post</a>")
+                    } else {
+                        console.log("There is no Admin")
+                    }
+                })
             blogList = data.data;
 
             // create sets of unique filter criteria
