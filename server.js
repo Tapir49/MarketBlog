@@ -122,13 +122,12 @@ app.get('/map', function (req, res) {
 })
 
 app.get('/edit-post', function (req, res) {
-    res.sendFile(__dirname + "/src/edit_post.html");
-
-    // if (req.isAuthenticated()) {
-    //     res.sendFile(__dirname + "/src/edit_post.html");
-    // } else {
-    //     res.redirect("/login.html?error=You must login and have permission to edit posts");
-    // }
+    //only send edit_post page if the user is logged in and is an admin
+    if (req.isAuthenticated() && req.user.admin) {
+        res.sendFile(__dirname + "/src/edit_post.html");
+    } else {
+        res.redirect("/login.html?error=You must login and have permission to edit posts");
+    }
 })
 
 app.get('/get_current_user', function (req, res) {
