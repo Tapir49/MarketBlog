@@ -5,6 +5,9 @@
     --powder-blue: #a8dadcff;
     --celadon-blue: #457b9dff;
     --prussian-blue: #1d3557ff;
+    --platinum: #e5e7e6;
+    --emerald: #00916e;
+    --honey: #fbaf00;
 }
 #header_section{
     font-family: 'Odibee Sans', cursive;
@@ -20,7 +23,7 @@
 
 #summary{
     font-family: 'Odibee Sans', cursive;
-    background-color: cornflowerblue;
+    background-color: var(--honey);
 }
 
 #footer{
