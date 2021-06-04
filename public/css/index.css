@@ -26,6 +26,10 @@
     background-color: var(--honey);
 }
 
+#message{
+    font-family: 'Odibee Sans', cursive;
+}
+
 #footer{
     height: 80px;
     background-color: var(--prussian-blue);
