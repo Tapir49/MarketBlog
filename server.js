@@ -110,8 +110,8 @@ app.get('/contact', function (req, res) {
     res.sendFile(__dirname + "/public/contact.html")
 })
 
-app.get('/contact', function (req, res) {
-    res.sendFile(__dirname + "/public/contact.html")
+app.get('/aboutme', function (req, res) {
+    res.sendFile(__dirname + "/public/aboutme.html")
 })
 
 app.get('/map', function (req, res) {
