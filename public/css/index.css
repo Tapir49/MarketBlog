@@ -23,11 +23,24 @@
 
 #summary{
     font-family: 'Odibee Sans', cursive;
-    background-color: var(--honey);
+    font-size: 30px;
+    background-color: var(--celadon-blue);
 }
 
 #message{
     font-family: 'Odibee Sans', cursive;
+}
+
+#blogs{
+    font-family: 'Odibee Sans', cursive;
+}
+
+#blogs img{
+    width: 75%;
+    height: 300px;
+    background-color: var(--platinum);
+    background-size: cover;
+    text-align: left;
 }
 
 #footer{
