@@ -7,7 +7,15 @@
     --prussian-blue: #1d3557ff;
 }
 #header_section{
-    font-family: 'Odibee Sans', cursive
+    font-family: 'Odibee Sans', cursive;
+}
+
+.header-img{
+    width: 50%;
+    height: 100px;
+    background: url('https://i.ibb.co/LC3n3T7/market-report-media-logo.png');
+    background-size: cover;
+    text-align: left;
 }
 
 #summary{
