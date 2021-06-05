@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const mongoose = require("mongoose");
 
+const axios = require('axios');
+const cheerio = require('cheerio');
+
 const session = require('express-session');
 const passport = require('passport');
 const passportLocalMongoose = require('passport-local-mongoose');
@@ -116,6 +119,15 @@ app.get('/aboutme', function (req, res) {
 
 app.get('/map', function (req, res) {
     res.sendFile(__dirname + "/public/map.html")
+})
+
+app.get('/edit-post', function (req, res) {
+    //only send edit_post page if the user is logged in and is an admin
+    if (req.isAuthenticated() && req.user.admin) {
+        res.sendFile(__dirname + "/src/edit_post.html");
+    } else {
+        res.redirect("/login.html?error=You must login and have permission to edit posts");
+    }
 })
 
 app.get('/get_current_user', function (req, res) {
@@ -334,3 +346,58 @@ app.post('/unsave_post', function (req, res) {
         })
     }
 });
+
+app.post("/edit-post", function (req, res) {
+    const blog_post = {
+        state: req.body.state,
+        municipality: req.body.municipality,
+        address: req.body.address,
+        banner: req.body.banner,
+        posted: Date.parse(req.body.posted),
+        type: req.body.type,
+        region: req.body.region,
+        group: req.body.group,
+        link: req.body.link,
+    };
+    if (req.body.blog_id) {
+        BlogPost.updateOne(
+            {_id: req.body.blog_id},
+            {$set: blog_post},
+            {},
+            (err, info) => {
+                if (err) {
+                    console.log(err["message"])
+                    res.redirect("/edit_post.html?error=" +JSON.stringify(err) + "&input=" + JSON.stringify(blog_post) + "&blog_id=" + req.body.blog_id)
+                } else {
+                    console.log(info)
+                    res.redirect("/blogpost_detail.html?blog_id=" + req.body.blog_id);
+                }
+            }
+
+        )
+    } else {
+        axios.get(blog_post.link)
+            .then((response) => {
+                const $ = cheerio.load(response.data);
+                // get all the text from the post in the "post-body" class div
+                // replace new lines with a space
+                // regex code to remove line breaks courtesy of
+                // https://www.geeksforgeeks.org/how-to-remove-all-line-breaks-from-a-string-using-javascript/
+                blog_post.content = $('.post-body').text().replace( /[\r\n]+/gm, " " );
+                const bp = new BlogPost(blog_post);
+                bp.save(
+                    (err, new_blog_post) => {
+                        if (err) {
+                            console.log(err["message"])
+                            res.redirect("/edit_post.html?error=" +JSON.stringify(err) + "&input=" + JSON.stringify(blog_post))
+                        } else {
+                            console.log(new_blog_post)
+                            res.redirect("/blogpost_detail.html?blog_id=" + new_blog_post._id);
+                        }
+                    }
+                )
+
+            })
+    }
+
+})

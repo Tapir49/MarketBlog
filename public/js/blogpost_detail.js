@@ -19,7 +19,16 @@ function load_blogpost(blog_post) {
     $("#bottom_buttons").append(`<a class="btn btn-primary" href="${blog_post.link}">Link to post</a>`)
         .append(`<a class="btn btn-secondary" href="/archive">Back to archive</a>`)
         .append(`<a class="btn btn-primary" id="save_post">Save post</a>`)
-
+    $.getJSON("/get_current_user")
+        .done(function (user) {
+            console.log(user)
+            // if the user is an admin, let them edit the post
+            if (user.data.admin === true) {
+                $('#bottom_buttons').append(`<a class='btn btn-secondary' href='/edit-post?blog_id=${blog_post._id}'>Edit Post</a>`)
+            } else {
+                console.log("There is no Admin")
+            }
+        })
     $("#save_post").click(function() {
         savePost(blog_post);
     })
