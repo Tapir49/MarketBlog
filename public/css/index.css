@@ -11,21 +11,21 @@
     --gray: #a5a58d;
 }
 #header_section{
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Oswald', sans-serif;
 }
 
 #summary{
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Oswald', sans-serif;
     font-size: 20px;
     background-color: var(--imperial-red);
 }
 
 #message{
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Oswald', sans-serif;
 }
 
 #blogs{
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Oswald', sans-serif;
 }
 
 #blogs img{
@@ -39,7 +39,7 @@
 #footer{
     height: 80px;
     background-color: var(--prussian-blue);
-    font-family: 'Odibee Sans', cursive;
+    font-family: 'Oswald', sans-serif;
     color: var(--honeydew);
     text-align: center;
     padding-top: 10px;
