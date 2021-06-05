@@ -25,7 +25,7 @@
 #summary{
     font-family: 'Odibee Sans', cursive;
     font-size: 20px;
-    background-color: var(--gray);
+    background-color: var(--imperial-red);
 }
 
 #message{
@@ -39,7 +39,7 @@
 #blogs img{
     width: 75%;
     height: 300px;
-    background-color: var(--platinum);
+    background-color: var(--gray);
     background-size: cover;
     text-align: left;
 }
