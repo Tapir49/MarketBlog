@@ -8,6 +8,7 @@
     --platinum: #e5e7e6;
     --emerald: #00916e;
     --honey: #fbaf00;
+    --gray: #a5a58d;
 }
 #header_section{
     font-family: 'Odibee Sans', cursive;
@@ -23,9 +24,11 @@
 
 #summary{
     font-family: 'Odibee Sans', cursive;
-    font-size: 30px;
-    background-color: var(--celadon-blue);
+    font-size: 20px;
+    background-color: var(--gray);
 }
+
+#carouselExampleIndicators
 
 #message{
     font-family: 'Odibee Sans', cursive;
